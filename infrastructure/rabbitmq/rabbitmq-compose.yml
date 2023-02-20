@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  rabbitmq:
+    container_name: events-rabbitmq
+    build: .
+    hostname: events-rabbitmq
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./definitions.json:/etc/rabbitmq/definitions.json
+      - ./data:/var/lib/rabbitmq/mnesia
+    networks:
+      - events-dev

@@ -1,0 +1,13 @@
+{
+  "name": "infrastructure",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "start:dev": "docker compose up"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

@@ -1,0 +1,107 @@
+{
+  "users": [
+    {
+      "name": "rabbitmq",
+      "password_hash": "sh084t80fucGwse261J0rfpQ0oeBgT/92XPRG99vCTF3Renx",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "administrator"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "dev"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "rabbitmq",
+      "vhost": "dev",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "global_parameters": [
+    {
+      "name": "cluster_name",
+      "value": "rabbit@rabbitmq-events"
+    }
+  ],
+  "queues": [
+    {
+      "name": "events_0",
+      "vhost": "dev",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-type": "classic",
+        "x-single-active-consumer": true
+      }
+    },
+    {
+      "name": "events_1",
+      "vhost": "dev",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-type": "classic",
+        "x-single-active-consumer": true
+      }
+    },
+    {
+      "name": "events_2",
+      "vhost": "dev",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-type": "classic",
+        "x-single-active-consumer": true
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "events",
+      "vhost": "dev",
+      "type": "x-consistent-hash",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "events",
+      "vhost": "dev",
+      "destination": "events_0",
+      "destination_type": "queue",
+      "routing_key": "1",
+      "arguments": {}
+    },
+    {
+      "source": "events",
+      "vhost": "dev",
+      "destination": "events_1",
+      "destination_type": "queue",
+      "routing_key": "1",
+      "arguments": {}
+    },
+    {
+      "source": "events",
+      "vhost": "dev",
+      "destination": "events_2",
+      "destination_type": "queue",
+      "routing_key": "1",
+      "arguments": {}
+    },
+    {
+      "source": "events",
+      "vhost": "dev",
+      "destination": "events_3",
+      "destination_type": "queue",
+      "routing_key": "1",
+      "arguments": {}
+    }
+  ]
+}

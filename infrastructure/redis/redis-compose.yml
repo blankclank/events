@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  redis-master:
+    container_name: events-redis-master
+    hostname: redis
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning
+    build:
+      context: .
+      args:
+        - CONFIG=redis-master.conf
+    volumes:
+      - ./data:/data/db
+    networks:
+      - events-dev
+  redis-sentinel:
+    container_name: events-redis-sentinel
+    image: redis:6.2-alpine
+    restart: always
+    build:
+      context: .
+      args:
+        - CONFIG=redis-sentinel.conf
+    depends_on:
+      - redis-master
+    entrypoint: redis-server /usr/local/etc/redis/redis.conf --sentinel

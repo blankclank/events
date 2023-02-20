@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  redis-master:
+    extends:
+      file: redis/redis-compose.yml
+      service: redis-master
+  redis-sentinel:
+    extends:
+      file: redis/redis-compose.yml
+      service: redis-sentinel
+  rabbitmq:
+    extends:
+      file: rabbitmq/rabbitmq-compose.yml
+      service: rabbitmq
+
+volumes:
+  redis:
+    driver: local
+
+networks:
+  events-dev:
+    external: true
